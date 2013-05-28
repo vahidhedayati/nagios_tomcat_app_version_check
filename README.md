@@ -24,11 +24,12 @@ This script will get the overall application versions for a running tomcat appli
         use                             your_group,srv-pnp
         hostgroup_name                  appver-your_app
         ;servicegroups                  appver-your_app
-        service_description             your_app App Versions
-        check_command                   app_version!apache-[a-z]lon!tomcat[1-4]!your_app!6!
+        service_description             OVERALL_VERSION_OF_your_app App Versions
+        check_command                   app_version!apache-[a-z]lon!tomcat[1-4]!your_app!6!overall!
     }
 
 
+The above services call the same script, the first one will ssh through to the pattern matched hosts, ports and return the version numbers per instance of the cluster. The second check is very similar but it does the overall check of all the cluster with two methods of calculation, a unique array check as well as a sum of all the version numbers / instances  - first version number returned = 0. Anything else will alert. This script is very useful to keep a birdseye view of all the version numbers of a given application. To ensure their all the same as well as grahing when deployments take place.  
 
 Add this to your command.cfg
 
