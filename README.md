@@ -27,3 +27,14 @@ This script will get the overall application versions for a running tomcat appli
         service_description             your_app App Versions
         check_command                   app_version!apache-[a-z]lon!tomcat[1-4]!your_app!6!
     }
+
+
+
+Add this to your command.cfg
+
+    define command {
+        command_name app_version
+        command_line $USER1$/check_app_version.sh "$ARG1$" "$ARG2$" $ARG3$ $ARG4$ $ARG5$
+    }   
+    # Test the script out
+    #./check_app_version.sh "apache-[a-z]lon" "tomcat[1-3]" your_app 5
